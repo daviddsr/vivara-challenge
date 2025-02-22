@@ -14,18 +14,54 @@ datasource db {
 }
 
 model Profile {
-  id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   firstName  String
   lastName   String
   profession String
-  balance    Decimal  @db.Decimal(10, 2) // Tipo Decimal con 2 decimales
+  balance    Decimal      @db.Decimal(10, 2)
   type       ProfileType
-  
+
+  clientContracts     Contract[] @relation("ClientContracts")
+  contractorContracts Contract[] @relation("ContractorContracts")
 
   @@map("Profiles")
+}
+
+model Contract {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  terms        String
+  status       ContractStatus
+
+  clientId     String  @db.Uuid
+  contractorId String  @db.Uuid
+  client       Profile @relation("ClientContracts", fields: [clientId], references: [id])
+  contractor   Profile @relation("ContractorContracts", fields: [contractorId], references: [id])
+
+  jobs         Job[]
+
+  @@map("Contracts")
+}
+
+model Job {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description String
+  price       Decimal   @db.Decimal(10, 2)
+  paid        Boolean   @default(false)
+  paymentDate DateTime?
+
+  contractId  String    @db.Uuid
+  contract    Contract  @relation(fields: [contractId], references: [id])
+
+  @@map("Jobs")
 }
 
 enum ProfileType {
   client
   contractor
+}
+
+enum ContractStatus {
+  new
+  in_progress
+  terminated
 }
