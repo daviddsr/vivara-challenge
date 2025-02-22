@@ -30,7 +30,7 @@ model Profile {
 model Contract {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   terms        String
-  status       ContractStatus
+  status       ContractStatus @default(new)
 
   clientId     String  @db.Uuid
   contractorId String  @db.Uuid

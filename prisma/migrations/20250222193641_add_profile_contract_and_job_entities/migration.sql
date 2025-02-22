@@ -20,7 +20,7 @@ CREATE TABLE "Profiles" (
 CREATE TABLE "Contracts" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "terms" TEXT NOT NULL,
-    "status" "ContractStatus" NOT NULL,
+    "status" "ContractStatus" NOT NULL DEFAULT 'new',
     "clientId" UUID NOT NULL,
     "contractorId" UUID NOT NULL,
 
