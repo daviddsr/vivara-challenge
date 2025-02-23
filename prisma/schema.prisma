@@ -30,7 +30,7 @@ model Profile {
 model Contract {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   terms        String
-  status       ContractStatus @default(new)
+  status       ContractStatus @default(NEW)
 
   clientId     String  @db.Uuid
   contractorId String  @db.Uuid
@@ -61,7 +61,7 @@ enum ProfileType {
 }
 
 enum ContractStatus {
-  new
-  in_progress
-  terminated
+  NEW
+  IN_PROGRESS
+  TERMINATED
 }

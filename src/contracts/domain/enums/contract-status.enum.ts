@@ -1,5 +1,5 @@
 export enum ContractStatus {
-  NEW = 'new',
-  IN_PROGRESS = 'in_progress',
-  COMPLETED = 'completed',
+  NEW = 'NEW',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
 }

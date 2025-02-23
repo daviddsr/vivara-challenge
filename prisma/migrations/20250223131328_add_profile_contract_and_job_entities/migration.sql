@@ -2,7 +2,7 @@
 CREATE TYPE "ProfileType" AS ENUM ('client', 'contractor');
 
 -- CreateEnum
-CREATE TYPE "ContractStatus" AS ENUM ('new', 'in_progress', 'terminated');
+CREATE TYPE "ContractStatus" AS ENUM ('NEW', 'IN_PROGRESS', 'TERMINATED');
 
 -- CreateTable
 CREATE TABLE "Profiles" (
@@ -20,7 +20,7 @@ CREATE TABLE "Profiles" (
 CREATE TABLE "Contracts" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "terms" TEXT NOT NULL,
-    "status" "ContractStatus" NOT NULL DEFAULT 'new',
+    "status" "ContractStatus" NOT NULL DEFAULT 'NEW',
     "clientId" UUID NOT NULL,
     "contractorId" UUID NOT NULL,
 
