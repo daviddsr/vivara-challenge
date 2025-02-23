@@ -72,7 +72,7 @@ describe('ProfileMiddleware', () => {
       mockNext,
     );
 
-    expect(mockRequest['user']).toEqual(mockProfile);
+    expect(mockRequest.profileId).toEqual(mockProfile.id);
     expect(mockNext).toHaveBeenCalled();
   });
 });

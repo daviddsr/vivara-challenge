@@ -27,7 +27,7 @@ export class ProfileMiddleware implements NestMiddleware {
       throw new UnauthorizedException('Invalid profile_id');
     }
 
-    req['user'] = profile;
+    req.profileId = String(profile.id);
     next();
   }
 }
