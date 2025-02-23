@@ -10,9 +10,10 @@ export class ContractsRepository implements ContractsRepositoryInterface {
     this.prisma = prisma;
   }
 
-  async findContractsByProfileId(profileId: string): Promise<Contract[]> {
+  async findActiveContractsByProfileId(profileId: string): Promise<Contract[]> {
     const contracts = await this.prisma.contract.findMany({
       where: {
+        NOT: { status: ContractStatus.TERMINATED },
         OR: [{ clientId: profileId }, { contractorId: profileId }],
       },
     });

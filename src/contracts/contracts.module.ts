@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 import { ContractsRepository } from './infrastructure/repositories/contracts.repository';
-import { GetContractsByProfileIdUseCase } from './application/use-cases/get-contracts-by-profile-id.use-case';
+import { GetActiveContractsByProfileIdUseCase } from './application/use-cases/get-active-contracts-by-profile-id.use-case';
+import { ContractsController } from './infrastructure/http/controllers/contracts.controller';
 
 @Module({
+  controllers: [ContractsController],
   providers: [
     {
       provide: 'ContractsRepositoryInterface',
       useClass: ContractsRepository,
     },
-    GetContractsByProfileIdUseCase,
+    GetActiveContractsByProfileIdUseCase,
   ],
-  exports: [GetContractsByProfileIdUseCase],
+  exports: [GetActiveContractsByProfileIdUseCase],
 })
 export class ContractsModule {}
