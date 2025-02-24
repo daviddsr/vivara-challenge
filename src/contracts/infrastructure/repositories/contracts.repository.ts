@@ -1,17 +1,14 @@
-import { PrismaClient } from '@prisma/client';
 import { ContractsRepositoryInterface } from '../../domain/repositories/contracts-repository.interface';
-import { Contract } from 'src/contracts/domain/entities/contract';
-import { ContractStatus } from 'src/contracts/domain/enums/contract-status.enum';
+import { Contract } from '../../domain/entities/contract';
+import { ContractStatus } from '../../domain/enums/contract-status.enum';
+import { PrismaService } from '../../../shared/infrastructure/database/prisma.service';
 
-export class ContractsRepository implements ContractsRepositoryInterface {
-  private prisma: PrismaClient;
-
-  constructor(prisma: PrismaClient) {
-    this.prisma = prisma;
-  }
-
+export class ContractsRepository
+  extends PrismaService
+  implements ContractsRepositoryInterface
+{
   async findActiveContractsByProfileId(profileId: string): Promise<Contract[]> {
-    const contracts = await this.prisma.contract.findMany({
+    const contracts = await this.contract.findMany({
       where: {
         NOT: { status: ContractStatus.TERMINATED },
         OR: [{ clientId: profileId }, { contractorId: profileId }],

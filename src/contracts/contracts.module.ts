@@ -12,6 +12,9 @@ import { ContractsController } from './infrastructure/http/controllers/contracts
     },
     GetActiveContractsByProfileIdUseCase,
   ],
-  exports: [GetActiveContractsByProfileIdUseCase],
+  exports: [
+    'ContractsRepositoryInterface',
+    GetActiveContractsByProfileIdUseCase,
+  ],
 })
 export class ContractsModule {}
