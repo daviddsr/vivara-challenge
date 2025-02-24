@@ -1,4 +1,4 @@
-import { ContractsController } from '../../../../infrastructure/http/controllers/contracts.controller';
+import { ContractController } from '../contract.controller';
 import { GetActiveContractsByProfileIdUseCase } from '../../../../application/use-cases/get-active-contracts-by-profile-id.use-case';
 import { Test, TestingModule } from '@nestjs/testing';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,8 +7,8 @@ import { ContractStatus } from '../../../../domain/enums/contract-status.enum';
 import { mock } from 'jest-mock-extended';
 import { Request } from 'express';
 
-describe('ContractsController', () => {
-  let controller: ContractsController;
+describe('ContractController', () => {
+  let controller: ContractController;
   let mockGetContractsByProfileIdUseCase: GetActiveContractsByProfileIdUseCase;
 
   const profileId = uuidv4();
@@ -25,7 +25,7 @@ describe('ContractsController', () => {
     } as unknown as GetActiveContractsByProfileIdUseCase;
 
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ContractsController],
+      controllers: [ContractController],
       providers: [
         {
           provide: GetActiveContractsByProfileIdUseCase,
@@ -34,7 +34,7 @@ describe('ContractsController', () => {
       ],
     }).compile();
 
-    controller = module.get<ContractsController>(ContractsController);
+    controller = module.get<ContractController>(ContractController);
   });
 
   it('GET /contracts should return a list of active contracts', async () => {
