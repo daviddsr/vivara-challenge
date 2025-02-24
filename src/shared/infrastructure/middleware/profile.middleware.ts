@@ -10,7 +10,7 @@ import { ProfilesRepositoryInterface } from '../../../profiles/domain/repositori
 @Injectable()
 export class ProfileMiddleware implements NestMiddleware {
   constructor(
-    @Inject('ProfileRepositoryInterface')
+    @Inject('ProfilesRepositoryInterface')
     private readonly profilesRepository: ProfilesRepositoryInterface,
   ) {}
 
