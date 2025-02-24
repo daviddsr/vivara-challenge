@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "ProfileType" AS ENUM ('client', 'contractor');
+CREATE TYPE "ProfileType" AS ENUM ('CLIENT', 'CONTRACTOR');
 
 -- CreateEnum
 CREATE TYPE "ContractStatus" AS ENUM ('NEW', 'IN_PROGRESS', 'TERMINATED');
