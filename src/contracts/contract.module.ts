@@ -14,5 +14,6 @@ import { GetContractByIdUseCase } from './application/use-cases/get-contract-by-
     GetActiveContractsByProfileIdUseCase,
     GetContractByIdUseCase,
   ],
+  exports: ['ContractRepository'],
 })
 export class ContractModule {}

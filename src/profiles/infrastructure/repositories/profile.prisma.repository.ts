@@ -10,12 +10,12 @@ export class ProfilePrismaRepository
   extends PrismaService
   implements ProfileRepository
 {
-  async findProfileById(profileId: string): Promise<Profile | null> {
+  async findProfileById(profileId: string): Promise<Profile | undefined> {
     const profile = await this.profile.findUnique({
       where: { id: profileId },
     });
 
-    if (!profile) return null;
+    if (!profile) return undefined;
 
     return new Profile(
       profile.firstName,
@@ -27,5 +27,12 @@ export class ProfilePrismaRepository
       ProfileType[profile.type],
       profile.id,
     );
+  }
+
+  async updateBalance(profileId: string, newBalance: number): Promise<void> {
+    await this.profile.update({
+      where: { id: profileId },
+      data: { balance: newBalance },
+    });
   }
 }

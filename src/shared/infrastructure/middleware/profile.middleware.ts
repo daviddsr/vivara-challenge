@@ -10,8 +10,8 @@ import { ProfileRepository } from '../../../profiles/domain/repositories/profile
 @Injectable()
 export class ProfileMiddleware implements NestMiddleware {
   constructor(
-    @Inject('ProfileRepositoryInterface')
-    private readonly profilesRepository: ProfileRepository,
+    @Inject('ProfileRepository')
+    private readonly profileRepository: ProfileRepository,
   ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
@@ -21,7 +21,7 @@ export class ProfileMiddleware implements NestMiddleware {
       throw new UnauthorizedException("Header 'profile_id' is required");
     }
 
-    const profile = await this.profilesRepository.findProfileById(profileId);
+    const profile = await this.profileRepository.findProfileById(profileId);
 
     if (!profile) {
       throw new UnauthorizedException('Invalid profile_id');

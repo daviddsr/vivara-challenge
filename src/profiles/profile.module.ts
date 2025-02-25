@@ -4,10 +4,10 @@ import { ProfilePrismaRepository } from './infrastructure/repositories/profile.p
 @Module({
   providers: [
     {
-      provide: 'ProfileRepositoryInterface',
+      provide: 'ProfileRepository',
       useClass: ProfilePrismaRepository,
     },
   ],
-  exports: ['ProfileRepositoryInterface'],
+  exports: ['ProfileRepository'],
 })
 export class ProfileModule {}

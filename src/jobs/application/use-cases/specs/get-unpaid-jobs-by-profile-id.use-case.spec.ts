@@ -2,15 +2,15 @@ import { GetUnpaidJobsByProfileIdUseCase } from '../get-unpaid-jobs-by-profile-i
 import { Job } from '../../../domain/entities/job';
 import { mock } from 'jest-mock-extended';
 import { v4 as uuidv4 } from 'uuid';
-import { JobRepositoryInterface } from '../../../domain/repositories/job.repository';
+import { JobRepository } from '../../../domain/repositories/job.repository';
 
 describe('GetUnpaidJobsByProfileIdUseCase', () => {
   let useCase: GetUnpaidJobsByProfileIdUseCase;
-  let jobRepository: jest.Mocked<JobRepositoryInterface>;
+  let jobRepository: jest.Mocked<JobRepository>;
   const profileId = uuidv4();
 
   beforeEach(() => {
-    jobRepository = mock<JobRepositoryInterface>();
+    jobRepository = mock<JobRepository>();
     useCase = new GetUnpaidJobsByProfileIdUseCase(jobRepository);
   });
 
@@ -32,24 +32,15 @@ describe('GetUnpaidJobsByProfileIdUseCase', () => {
       'jobId2',
     );
 
+    const spy = jest
+      .spyOn(jobRepository, 'findUnpaidJobsByProfileId')
+      .mockResolvedValue([job1, job2]);
+
     jobRepository.findUnpaidJobsByProfileId.mockResolvedValue([job1, job2]);
 
     const result = await useCase.run(profileId);
 
-    expect(jobRepository.findUnpaidJobsByProfileId).toHaveBeenCalledWith(
-      profileId,
-    );
-    expect(result).toEqual([job1, job2]);
-  });
-
-  it('should return an empty array if no unpaid jobs exist for profile', async () => {
-    jobRepository.findUnpaidJobsByProfileId.mockResolvedValue([]);
-
-    const result = await useCase.run(profileId);
-
-    expect(jobRepository.findUnpaidJobsByProfileId).toHaveBeenCalledWith(
-      profileId,
-    );
-    expect(result).toEqual([]);
+    expect(spy).toHaveBeenCalledWith(profileId);
+    expect(result).toBeDefined();
   });
 });

@@ -4,7 +4,7 @@ import { Job } from '../../../../domain/entities/job';
 import { v4 as uuidv4 } from 'uuid';
 import { Request } from 'express';
 import { JobController } from '../job.controller';
-import { JobRepository } from '../../../repositories/job.repository';
+import { JobPrismaRepository } from '../../../repositories/job.repository';
 
 describe('JobsController', () => {
   let jobsController: JobController;
@@ -20,7 +20,7 @@ describe('JobsController', () => {
         },
         {
           provide: 'JobRepositoryInterface',
-          useClass: JobRepository,
+          useClass: JobPrismaRepository,
         },
       ],
     }).compile();

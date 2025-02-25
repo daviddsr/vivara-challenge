@@ -1,5 +1,5 @@
 export class Job {
-  public readonly id?: string;
+  public readonly id: string;
   public readonly description: string;
   public readonly price: number;
   public readonly paid: boolean;
@@ -7,12 +7,12 @@ export class Job {
   public readonly contractId: string;
 
   constructor(
+    id: string,
     description: string,
     price: number,
     contractId: string,
     paid: boolean = false,
     paymentDate?: Date,
-    id?: string,
   ) {
     this.id = id;
     this.description = description;
