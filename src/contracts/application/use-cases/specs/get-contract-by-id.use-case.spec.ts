@@ -5,16 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { ContractRepositoryInterface } from '../../../domain/repositories/contract.repository';
 import { ContractNotFoundException } from '../../../domain/exceptions/contract-not-found.exception';
 import { ForbiddenContractAccessException } from '../../../domain/exceptions/forbidden-contract-access.exception';
+import { mock } from 'jest-mock-extended';
 
 describe('GetContractByIdUseCase', () => {
-  let contractRepository: ContractRepositoryInterface;
+  let contractRepository: jest.Mocked<ContractRepositoryInterface>;
   let useCase: GetContractByIdUseCase;
 
   beforeEach(() => {
-    contractRepository = {
-      findById: jest.fn(),
-    } as unknown as ContractRepositoryInterface;
-
+    contractRepository = mock<ContractRepositoryInterface>();
     useCase = new GetContractByIdUseCase(contractRepository);
   });
 

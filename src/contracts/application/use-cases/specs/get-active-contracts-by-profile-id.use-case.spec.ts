@@ -3,10 +3,11 @@ import { GetActiveContractsByProfileIdUseCase } from '../get-active-contracts-by
 import { ContractStatus } from '../../../domain/enums/contract-status.enum';
 import { v4 as uuidv4 } from 'uuid';
 import { ContractRepositoryInterface } from '../../../domain/repositories/contract.repository';
+import { mock } from 'jest-mock-extended';
 
-describe('GetNotTerminatedContractsByProfileIdUseCase', () => {
+describe('GetActiveContractsByProfileIdUseCase', () => {
   let useCase: GetActiveContractsByProfileIdUseCase;
-  let contractRepository: Partial<ContractRepositoryInterface>;
+  let contractRepository: jest.Mocked<ContractRepositoryInterface>;
   const profileId = uuidv4();
   const contract = new Contract(
     'Test contract',
@@ -16,16 +17,15 @@ describe('GetNotTerminatedContractsByProfileIdUseCase', () => {
   );
 
   beforeEach(() => {
-    contractRepository = {
-      findActiveContractsByProfileId: jest.fn().mockResolvedValue([contract]),
-    };
-
-    useCase = new GetActiveContractsByProfileIdUseCase(
-      contractRepository as ContractRepositoryInterface,
-    );
+    contractRepository = mock<ContractRepositoryInterface>();
+    useCase = new GetActiveContractsByProfileIdUseCase(contractRepository);
   });
 
   it('should return a list of contracts from a given profile', async () => {
+    contractRepository.findActiveContractsByProfileId.mockResolvedValue([
+      contract,
+    ]);
+
     const result = await useCase.run(profileId);
 
     expect(result).toEqual([contract]);
