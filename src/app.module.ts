@@ -6,6 +6,7 @@ import { DatabaseModule } from './shared/infrastructure/database/database.module
 import { ContractModule } from './contracts/contract.module';
 import { ProfileModule } from './profiles/profile.module';
 import { ProfileMiddleware } from './shared/infrastructure/middleware/profile.middleware';
+import { JobModule } from './jobs/job.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ProfileMiddleware } from './shared/infrastructure/middleware/profile.mi
     DatabaseModule,
     ContractModule,
     ProfileModule,
+    JobModule,
   ],
   controllers: [AppController],
   providers: [AppService],

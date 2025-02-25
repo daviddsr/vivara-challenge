@@ -6,10 +6,10 @@ import { JobRepositoryInterface } from '../../domain/repositories/job.repository
 export class GetUnpaidJobsByProfileIdUseCase {
   constructor(
     @Inject('JobRepositoryInterface')
-    private readonly jobsRepository: JobRepositoryInterface,
+    private readonly jobRepository: JobRepositoryInterface,
   ) {}
 
   async run(profileId: string): Promise<Job[]> {
-    return this.jobsRepository.findUnpaidJobsByProfileId(profileId);
+    return this.jobRepository.findUnpaidJobsByProfileId(profileId);
   }
 }
