@@ -17,5 +17,6 @@ import { ContractModule } from '../contracts/contract.module';
     GetUnpaidJobsByProfileIdUseCase,
     PayJobUseCase,
   ],
+  exports: ['JobRepository'],
 })
 export class JobModule {}

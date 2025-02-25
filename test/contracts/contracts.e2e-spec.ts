@@ -18,7 +18,7 @@ describe('ContractController', () => {
       imports: [AppModule],
       providers: [
         {
-          provide: 'ProfileRepositoryInterface',
+          provide: 'ProfileRepository',
           useClass: ProfilePrismaRepository,
         },
         {

@@ -16,20 +16,20 @@ describe('GetUnpaidJobsByProfileIdUseCase', () => {
 
   it('should return unpaid jobs for a given profile', async () => {
     const job1 = new Job(
+      'jobId1',
       'Job 1',
       100,
       'contractId1',
       false,
       undefined,
-      'jobId1',
     );
     const job2 = new Job(
+      'jobId2',
       'Job 2',
       200,
       'contractId2',
       false,
       undefined,
-      'jobId2',
     );
 
     const spy = jest

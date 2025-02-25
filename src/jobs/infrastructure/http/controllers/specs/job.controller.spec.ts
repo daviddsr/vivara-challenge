@@ -6,7 +6,7 @@ import { Request } from 'express';
 import { JobController } from '../job.controller';
 import { JobPrismaRepository } from '../../../repositories/job.repository';
 
-describe('JobsController', () => {
+describe('JobController', () => {
   let jobsController: JobController;
   let getUnpaidJobsByProfileIdUseCase: GetUnpaidJobsByProfileIdUseCase;
 
@@ -19,7 +19,7 @@ describe('JobsController', () => {
           useClass: GetUnpaidJobsByProfileIdUseCase,
         },
         {
-          provide: 'JobRepositoryInterface',
+          provide: 'JobRepository',
           useClass: JobPrismaRepository,
         },
       ],
@@ -35,7 +35,7 @@ describe('JobsController', () => {
   it('should return a list of unpaid jobs from active contracts from a given profile', async () => {
     const profileId = uuidv4();
     const contractId = uuidv4();
-    const job = new Job('Job 1', 500, contractId, false);
+    const job = new Job(uuidv4(), 'Job 1', 500, contractId, false);
 
     jest.spyOn(getUnpaidJobsByProfileIdUseCase, 'run').mockResolvedValue([job]);
 

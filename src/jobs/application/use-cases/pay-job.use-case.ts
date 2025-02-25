@@ -7,10 +7,10 @@ import {
 import { JobRepository } from '../../domain/repositories/job.repository';
 import { ProfileRepository } from '../../../profiles/domain/repositories/profile.repository';
 import { PrismaService } from '../../../shared/infrastructure/database/prisma.service';
-import { ProfileType } from 'src/profiles/domain/enums/profile-type.enum';
-import { ContractRepository } from 'src/contracts/domain/repositories/contract.repository';
-import { Profile } from 'src/profiles/domain/entities/profile';
-import { Job } from 'src/jobs/domain/entities/job';
+import { ProfileType } from '../../../profiles/domain/enums/profile-type.enum';
+import { ContractRepository } from '../../../contracts/domain/repositories/contract.repository';
+import { Profile } from '../../../profiles/domain/entities/profile';
+import { Job } from '../../../jobs/domain/entities/job';
 
 @Injectable()
 export class PayJobUseCase {
