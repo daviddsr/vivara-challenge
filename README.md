@@ -1,99 +1,106 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Vivara Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📌 Project Description
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Vivara Challenge is a backend application developed with **NestJS**, following a **hexagonal architecture** with **bounded contexts**. Its goal is to manage profiles, contracts, and jobs, allowing clients to pay for pending jobs if they have sufficient balance.
 
-## Description
+## 🚀 Technologies Used
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **NestJS** (Backend framework)
+- **TypeScript**
+- **Prisma** (ORM for PostgreSQL)
+- **PostgreSQL** (Relational database)
+- **Jest** (Testing)
+- **Supertest** (Integration testing)
 
-## Project setup
+## 📂 Project Architecture
 
-```bash
-$ npm install
+The project follows a hexagonal architecture, organized into **bounded contexts** inside `src/`:
+
+- `profiles/` → Profile management
+- `contracts/` → Contract management
+- `jobs/` → Job management
+- `shared/` → Middleware, and configuration
+
+Each bounded context has **three main layers**:
+
+1. **Application** → Use cases
+2. **Domain** → Entities and repositories
+3. **Infrastructure** → HTTP controllers and implementation repositories
+
+## 🛠️ Local Environment Setup
+
+### 1️⃣ Clone the Repository
+
+```sh
+git clone <REPOSITORY_URL>
+cd vivara-challenge
 ```
 
-## Compile and run the project
+### Install dependencies
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sh
+npm install
 ```
 
-## Run tests
+### Run migrations
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```sh
+npx prisma migrate dev --name init
 ```
 
-## Deployment
+### Seed database
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
+```sh
+npm run seed
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Start local server
 
-## Resources
+```sh
+npm run start:dev
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Run unit tests
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```sh
+npm run test
+```
 
-## Support
+### Run integration tests
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```sh
+npm run test:e2e
+```
 
-## Stay in touch
+## 🛠️ Challenge requirements
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Profile
 
-## License
+A profile can be either a client or a contractor.
+clients create contracts with contractors. contractor does jobs for clients and get paid.
+Each profile has a balance property.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Contract
+
+A contract between and client and a contractor.
+Contracts have 3 statuses, new, in_progress, terminated. contracts are considered active only when in status in_progress
+Contracts group jobs within them.
+
+# Job
+
+Contractor get paid for jobs by clients under a certain contract.
+
+# Below is a list of the required API's for the application.
+
+GET /contracts/:id - This API is broken 😵! it should return the contract only if it belongs to the profile calling. better fix that!
+
+GET /contracts - Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
+
+GET /jobs/unpaid - Get all unpaid jobs for a user (either a client or contractor), for active contracts only.
+
+POST /jobs/:id/pay - Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance.
+
+### Aditional notes
+
+All requests must include profile_id in headers with the id of a Profile
