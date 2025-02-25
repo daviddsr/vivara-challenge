@@ -2,11 +2,11 @@ import { Contract } from '../../../domain/entities/contract';
 import { GetActiveContractsByProfileIdUseCase } from '../get-active-contracts-by-profile-id.use-case';
 import { ContractStatus } from '../../../domain/enums/contract-status.enum';
 import { v4 as uuidv4 } from 'uuid';
-import { ContractsRepositoryInterface } from '../../../domain/repositories/contracts-repository.interface';
+import { ContractRepositoryInterface } from '../../../domain/repositories/contract.repository';
 
 describe('GetNotTerminatedContractsByProfileIdUseCase', () => {
   let useCase: GetActiveContractsByProfileIdUseCase;
-  let contractsRepository: ContractsRepositoryInterface;
+  let contractRepository: Partial<ContractRepositoryInterface>;
   const profileId = uuidv4();
   const contract = new Contract(
     'Test contract',
@@ -16,11 +16,13 @@ describe('GetNotTerminatedContractsByProfileIdUseCase', () => {
   );
 
   beforeEach(() => {
-    contractsRepository = {
+    contractRepository = {
       findActiveContractsByProfileId: jest.fn().mockResolvedValue([contract]),
     };
 
-    useCase = new GetActiveContractsByProfileIdUseCase(contractsRepository);
+    useCase = new GetActiveContractsByProfileIdUseCase(
+      contractRepository as ContractRepositoryInterface,
+    );
   });
 
   it('should return a list of contracts from a given profile', async () => {
@@ -29,7 +31,7 @@ describe('GetNotTerminatedContractsByProfileIdUseCase', () => {
     expect(result).toEqual([contract]);
 
     expect(
-      contractsRepository.findActiveContractsByProfileId,
+      contractRepository.findActiveContractsByProfileId,
     ).toHaveBeenCalledWith(profileId);
   });
 });

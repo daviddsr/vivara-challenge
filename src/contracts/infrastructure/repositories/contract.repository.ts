@@ -26,4 +26,20 @@ export class ContractRepository
         ),
     );
   }
+
+  async findById(contractId: string): Promise<Contract | null> {
+    const contract = await this.contract.findUnique({
+      where: { id: contractId },
+    });
+
+    if (!contract) return null;
+
+    return new Contract(
+      contract.terms,
+      contract.clientId,
+      contract.contractorId,
+      ContractStatus[contract.status],
+      contract.id,
+    );
+  }
 }
