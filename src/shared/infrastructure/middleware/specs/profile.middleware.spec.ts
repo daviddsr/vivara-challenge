@@ -1,5 +1,5 @@
 import { ProfileMiddleware } from '../profile.middleware';
-import { ProfileRepositoryInterface } from '../../../../profiles/domain/repositories/profile.repository';
+import { ProfileRepository } from '../../../../profiles/domain/repositories/profile.repository';
 import { UnauthorizedException } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { Profile } from '../../../../profiles/domain/entities/profile';
@@ -7,7 +7,7 @@ import { ProfileType } from '../../../../profiles/domain/enums/profile-type.enum
 
 describe('ProfileMiddleware', () => {
   let middleware: ProfileMiddleware;
-  let mockProfileRepository: ProfileRepositoryInterface;
+  let mockProfileRepository: ProfileRepository;
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
   let mockNext: NextFunction;
@@ -15,7 +15,7 @@ describe('ProfileMiddleware', () => {
   beforeEach(() => {
     mockProfileRepository = {
       findProfileById: jest.fn(),
-    } as unknown as ProfileRepositoryInterface;
+    } as unknown as ProfileRepository;
 
     middleware = new ProfileMiddleware(mockProfileRepository);
     mockRequest = {};

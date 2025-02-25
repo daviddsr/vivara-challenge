@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ProfileRepository } from './infrastructure/repositories/profile.repository';
+import { ProfilePrismaRepository } from './infrastructure/repositories/profile.prisma.repository';
 
 @Module({
   providers: [
     {
       provide: 'ProfileRepositoryInterface',
-      useClass: ProfileRepository,
+      useClass: ProfilePrismaRepository,
     },
   ],
   exports: ['ProfileRepositoryInterface'],

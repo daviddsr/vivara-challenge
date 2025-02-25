@@ -1,11 +1,11 @@
-import { ContractRepositoryInterface } from '../../domain/repositories/contract.repository';
+import { ContractRepository } from '../../domain/repositories/contract.repository';
 import { Contract } from '../../domain/entities/contract';
 import { ContractStatus } from '../../domain/enums/contract-status.enum';
 import { PrismaService } from '../../../shared/infrastructure/database/prisma.service';
 
-export class ContractRepository
+export class ContractPrismaRepository
   extends PrismaService
-  implements ContractRepositoryInterface
+  implements ContractRepository
 {
   async findActiveContractsByProfileId(profileId: string): Promise<Contract[]> {
     const contracts = await this.contract.findMany({

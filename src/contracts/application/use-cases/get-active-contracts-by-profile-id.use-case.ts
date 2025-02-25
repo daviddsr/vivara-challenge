@@ -1,10 +1,11 @@
-import { Inject } from '@nestjs/common';
-import { ContractRepositoryInterface } from '../../domain/repositories/contract.repository';
+import { Inject, Injectable } from '@nestjs/common';
+import { ContractRepository } from '../../domain/repositories/contract.repository';
 
+@Injectable()
 export class GetActiveContractsByProfileIdUseCase {
   constructor(
-    @Inject('ContractsRepositoryInterface')
-    private readonly contractRepository: ContractRepositoryInterface,
+    @Inject('ContractRepository')
+    private readonly contractRepository: ContractRepository,
   ) {}
 
   async run(profileId: string) {

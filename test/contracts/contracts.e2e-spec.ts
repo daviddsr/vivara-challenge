@@ -6,8 +6,8 @@ import { PrismaService } from '../../src/shared/infrastructure/database/prisma.s
 import { ContractStatus } from '../../src/contracts/domain/enums/contract-status.enum';
 import { ProfileType } from '../../src/profiles/domain/enums/profile-type.enum';
 import { v4 as uuidv4 } from 'uuid';
-import { ProfileRepository } from '../../src/profiles/infrastructure/repositories/profile.repository';
-import { ContractRepository } from '../../src/contracts/infrastructure/repositories/contract.repository';
+import { ProfilePrismaRepository } from '../../src/profiles/infrastructure/repositories/profile.prisma.repository';
+import { ContractPrismaRepository } from '../../src/contracts/infrastructure/repositories/contract.prisma.repository';
 
 describe('ContractController', () => {
   let app: INestApplication;
@@ -19,11 +19,11 @@ describe('ContractController', () => {
       providers: [
         {
           provide: 'ProfileRepositoryInterface',
-          useClass: ProfileRepository,
+          useClass: ProfilePrismaRepository,
         },
         {
-          provide: 'ContractRepositoryInterface',
-          useClass: ContractRepository,
+          provide: 'ContractRepository',
+          useClass: ContractPrismaRepository,
         },
       ],
     }).compile();

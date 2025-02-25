@@ -5,13 +5,13 @@ import {
   Inject,
 } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { ProfileRepositoryInterface } from '../../../profiles/domain/repositories/profile.repository';
+import { ProfileRepository } from '../../../profiles/domain/repositories/profile.repository';
 
 @Injectable()
 export class ProfileMiddleware implements NestMiddleware {
   constructor(
     @Inject('ProfileRepositoryInterface')
-    private readonly profilesRepository: ProfileRepositoryInterface,
+    private readonly profilesRepository: ProfileRepository,
   ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {

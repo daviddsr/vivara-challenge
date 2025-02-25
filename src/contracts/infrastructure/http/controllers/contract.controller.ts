@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Req,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Get, Param, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { GetActiveContractsByProfileIdUseCase } from '../../../application/use-cases/get-active-contracts-by-profile-id.use-case';
 import { GetContractByIdUseCase } from '../../../application/use-cases/get-contract-by-id.use-case';
@@ -24,7 +17,6 @@ export class ContractController {
   }
 
   @Get(':id')
-  @UsePipes(new ValidationPipe({ transform: true }))
   async getContractById(
     @Param() params: GetContractByIdDto,
     @Req() req: Request,

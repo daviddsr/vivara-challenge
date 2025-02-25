@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Decimal } from '@prisma/client/runtime/library';
 import { PrismaService } from '../../../shared/infrastructure/database/prisma.service';
-import { ProfileRepositoryInterface } from '../../domain/repositories/profile.repository';
+import { ProfileRepository } from '../../domain/repositories/profile.repository';
 import { Profile } from '../../domain/entities/profile';
 import { ProfileType } from '../../domain/enums/profile-type.enum';
 
 @Injectable()
-export class ProfileRepository
+export class ProfilePrismaRepository
   extends PrismaService
-  implements ProfileRepositoryInterface
+  implements ProfileRepository
 {
   async findProfileById(profileId: string): Promise<Profile | null> {
     const profile = await this.profile.findUnique({
